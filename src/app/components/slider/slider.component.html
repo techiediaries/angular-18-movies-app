@@ -1,0 +1,38 @@
+<div class="relative">
+  @if(dataObs | async; as movies){ @for(movie of movies; track movie.id){
+  @if($index === slideIndex){
+  <div>
+    <img
+      class="w-full h-full object-cover border-0 z-9"
+      [src]="imagesBaseUrl + 'w1280' + movie.backdrop_path"
+      [alt]="movie.title"
+    />
+    <div class="absolute bottom-[20%] p-10 text-white">
+      <h2 class="text-ellipsis text-2xl font-semibold">
+        {{ movie.title }}
+      </h2>
+      <p>{{ movie.overview }}</p>
+      <p>
+        Rating: {{ movie.vote_average }} | Popularity:
+        {{ movie.popularity }}
+      </p>
+      <p>
+        Release Date:
+        {{ movie.release_date | date }}
+      </p>
+    </div>
+    <div class="absolute top-0 w-full h-full md:flex p-5 items-center justify-between">
+      <button
+        (click)="slideLeft()"
+        class="bg-white p-0 rounded-full w-7 h-7 text-xl z-10 text-black">
+        <
+        </button>
+      <button
+        (click)="slideRight()"
+        class="bg-white p-0 w-7 h-7 rounded-full text-xl z-10 text-black">
+        >
+      </button>
+    </div>
+  </div>
+  } } }
+</div>

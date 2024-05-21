@@ -1,0 +1,7 @@
+<div infiniteScroll (scrolled)="onScroll()" class="container mx-auto pt-20">
+  <div class="grid grid-cols-[repeat(auto-fit,230px)] gap-5 justify-center">
+    @for(movie of moviesResults; track movie.id){
+    <app-movie [movie]="movie"></app-movie>
+    }
+  </div>
+</div>

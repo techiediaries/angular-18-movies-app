@@ -1,0 +1,76 @@
+<div class="relative h-full">
+  <p class="text-white">Hello</p>
+  @if(movieObs$ | async; as movie){ 
+    @if(movie.poster_path){
+
+  <div class="text-white">
+    <div class="w-full h-60">
+      <img
+        class="w-full h-full object-cover"
+        class="object-cover w-full h-full"
+        [src]="imagesBaseUrl + '/original/' + movie.poster_path"
+        [alt]="movie.title"
+      />
+    </div>
+    <div class="container mx-auto flex flex-row">
+      <div class="-mt-20 mx-5">
+        <img
+          class="w-[400px] h-70 object-cover"
+          [src]="imagesBaseUrl + '/original/' + movie.poster_path"
+          [alt]="movie.title"
+        />
+        <button (click)="openVideo()" class="border border-solid border-white my-5 bg-slate-50 text-black w-full p-3 rounded font-bold">
+          Play Now
+        </button>
+      </div>
+      <div class="p-3 flex flex-col gap-7">
+        <h2 class="text-ellipsis text-2xl border-b font-semibold">
+          {{ movie.title }}
+        </h2>
+        <p class="border-b">{{ movie.overview }}</p>
+        <p class="border-b">
+          Rating: {{ movie.vote_average }} | Popularity:
+          {{ movie.popularity }} | Duration : {{ movie.runtime }}
+        </p>
+        <p class="border-b">
+          Status: {{ movie.status }} | Release Date:
+          {{ movie.release_date | date }} | Revenue: {{ movie.revenue | currency }}
+        </p>
+        <h2>Cast:</h2>
+        <div class="grid grid-cols-[repeat(auto-fit,200px)]">
+          @if(movieCastObs$ | async; as movieCast) { 
+            @for(actor of movieCast; track actor.id){
+              
+          <div class="m-1">
+            
+            <img
+              class="h-24 w-24 rounded-full object-cover"
+              [src]="imagesBaseUrl + '/w185/' + actor.profile_path"
+            />
+            <p>{{ actor.name }}</p>
+          </div>
+        
+          } }
+        </div>
+      </div>
+    </div>
+    <div class="container mx-auto">
+      <h2 class="text-2xl font-bold">Similar Movies</h2>
+      <app-movies-scroller [dataObs]="similarMoviesObs$" />
+    </div>
+  </div>
+  } }
+  @if(showVideo){
+    @if(movieVideosObs$ | async; as videos)
+    {
+      <section class="fixed bg-neutral-700 top-0 right-0 bottom-0 left-0 z-40 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-black w-full  max-h-[80vh] max-w-screen-lg aspect-video rounded  relative">
+          <button (click)="closeVideo()" class="absolute -right-1 -top-6 text-3xl z-50">X</button>
+          <app-video [key]="videos[0].key" />
+        </div>
+      </section>
+
+    }
+  }
+</div>
+

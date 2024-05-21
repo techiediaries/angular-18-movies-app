@@ -1,0 +1,13 @@
+<div class="mt-12">
+    <app-slider [dataObs] = "nowPlayingMovies$" [imagesBaseUrl]="imagesBaseUrl"/>
+    <div class="container mx-auto">
+  <h1 class="mt-30 py-20 ml-10 font-bold text-2xl text-white">Popular</h1>
+  <app-movies-scroller [dataObs]="popularMovies$" />
+
+  <h1 class="mt-10 ml-10 font-bold text-2xl text-white">Top</h1>
+  <app-movies-scroller [dataObs]="topRatedMovies$" />
+
+  <h1 class="mt-10 ml-10 font-bold text-2xl text-white">Now Playing</h1>
+  <app-movies-scroller [dataObs]="nowPlayingMovies$" />
+</div>
+</div>

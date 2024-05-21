@@ -1,0 +1,27 @@
+<a
+  routerLink="/show-movie/{{ movie.id }}"
+  class="w-full min-w-[230px] h-90 overflow-hidden block rounded relative hover:scale-105 transition-all">
+  
+  @if(movie.poster_path){
+  <img
+    class="w-full"
+    [src]="imagesBaseUrl + '/w185/' + movie.poster_path"
+    [alt]="movie.title"
+  />
+  }
+
+  <div class="absolute bottom-0 h-30 bg-black/60 p-2 w-full text-white">
+    <h2 class="text-ellipsis text-lg font-semibold">
+      {{ movie.title }}
+    </h2>
+
+    <div class="flex justify-between bottom-0">
+      <p>
+        {{ movie.release_date | date }}
+      </p>
+      <p class="bg-black text-white rounded m-0 text-sm">
+        Rating: {{ movie.vote_average }}
+      </p>
+    </div>
+  </div>
+</a>
